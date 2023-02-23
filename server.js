@@ -49,6 +49,15 @@ app.put('/musicians/:id', async (req, res) => {
   }
 });
 
+app.delete('/musicians/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Musician.destroy({ where: { id } });
+    res.status(200).send('Musician Deleted!');
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
 app.listen(port, () => {
   sequelize.sync();
   console.log(`Listening on port ${port}`);

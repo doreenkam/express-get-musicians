@@ -26,6 +26,16 @@ app.get('/musicians/:id', async (req, res) => {
   }
 });
 
+app.post('/musicians', async (req, res) => {
+  try {
+    const { name, instrument } = req.body;
+    const data = await Musician.create({ name, instrument });
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
 app.listen(port, () => {
   sequelize.sync();
   console.log(`Listening on port ${port}`);

@@ -5,6 +5,9 @@ const { sequelize } = require('./db');
 
 const port = 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/musicians', async (req, res) => {
   try {
     const data = await Musician.findAll();
